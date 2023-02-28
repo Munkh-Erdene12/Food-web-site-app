@@ -9,6 +9,7 @@
     "dev": "webpack --mode=development",
     "watch": "webpack --watch",
     "builder": "webpack --mode=production",
+    "builds": "./node_modules/.bin/babel src --out-dir lib",
     "start": "webpack serve --open"
   },
   "keywords": [],
@@ -25,6 +26,7 @@
     "webpack-dev-server": "^4.11.1"
   },
   "dependencies": {
-    "@babel/polyfill": "^7.12.1"
+    "@babel/polyfill": "^7.12.1",
+    "axios": "^1.3.4"
   }
 }
