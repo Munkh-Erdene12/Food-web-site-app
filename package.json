@@ -9,7 +9,7 @@
     "dev": "webpack --mode=development",
     "watch": "webpack --watch",
     "builder": "webpack --mode=production",
-    "builds": "./node_modules/.bin/babel src --out-dir lib",
+    "builds": "./node_modules/.bin/babel src --out-dir docs",
     "start": "webpack serve --open"
   },
   "keywords": [],
