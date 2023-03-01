@@ -44,3 +44,12 @@ elements.searchForm.addEventListener("submit", (e) => {
   e.preventDefault();
   controlSearch();
 });
+
+elements.pageBtns.addEventListener("click", (e) => {
+  const btn = e.target.closest(".btn-inline ");
+  if (btn) {
+    const goto = parseInt(btn.dataset.goto);
+    searchView.clearSearchResult();
+    searchView.renderRecipes(state.search.result, goto);
+  }
+});
