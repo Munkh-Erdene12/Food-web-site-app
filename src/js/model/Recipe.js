@@ -7,8 +7,7 @@ export default class Recipe {
     const result = await axios(
       `https://forkify-api.herokuapp.com/api/get?rId=${this.id}`
     );
-    console.log(result);
-    this.image__url = result.data.recipe.image__url;
+    this.image_url = result.data.recipe.image_url;
     this.ingredients = result.data.recipe.ingredients;
     this.publisher = result.data.recipe.publisher;
     this.recipe_id = result.data.recipe.recipe_id;

@@ -3,6 +3,11 @@ import Search from "./model/search";
 import { elements, renderLoader, clearLoader } from "./view/base";
 import * as searchView from "./view/searchView";
 import Recipe from "./model/Recipe";
+import {
+  renderRecipe,
+  clearRecipe,
+  highlightSelectRecipe,
+} from "./view/recipeView";
 
 /**
  * web app төлөв
@@ -61,12 +66,17 @@ const controlRecipe = async () => {
   // 2. Жорийн моделийг үүсгэж өгнө
   state.recipe = new Recipe(id);
   // 3. UI дэлгэцийг бэлтгэнэ
+  clearRecipe();
+  renderLoader(elements.recipeDiv);
+  highlightSelectRecipe(id);
   // 4. жороо татаж авчирна
   await state.recipe.getRecipe();
   // 5. жорыг гүйцэтгэх хугацаа болон орцыг тооцоолно
+  clearLoader();
   state.recipe.calcTime();
   state.recipe.calcHuniiToo();
   // 6. жороо дэлгэц гаргана
-  console.log(state.recipe);
+  renderRecipe(state.recipe);
 };
 window.addEventListener("hashchange", controlRecipe);
+window.addEventListener("load", controlRecipe);
