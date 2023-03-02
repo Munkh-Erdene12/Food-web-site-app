@@ -5,8 +5,8 @@ export const elements = {
   searchResultsDiv: document.querySelector(".results"),
   pageBtns: document.querySelector(".results__pages"),
   recipeDiv: document.querySelector(".recipe"),
+  shoppingList: document.querySelector(".shopping__list"),
 };
-
 export const elementsString = {
   loader: "loader",
 };

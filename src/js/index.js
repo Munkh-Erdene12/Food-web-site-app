@@ -8,7 +8,8 @@ import {
   clearRecipe,
   highlightSelectRecipe,
 } from "./view/recipeView";
-
+import List from "./model/list";
+import * as listView from "./view/listview";
 /**
  * web app төлөв
  * тухайн үзүүлж байгаа жор
@@ -63,20 +64,48 @@ elements.pageBtns.addEventListener("click", (e) => {
 const controlRecipe = async () => {
   // 1. URL-аас ID-ийг салгах
   const id = window.location.hash.replace("#", "");
-  // 2. Жорийн моделийг үүсгэж өгнө
-  state.recipe = new Recipe(id);
-  // 3. UI дэлгэцийг бэлтгэнэ
-  clearRecipe();
-  renderLoader(elements.recipeDiv);
-  highlightSelectRecipe(id);
-  // 4. жороо татаж авчирна
-  await state.recipe.getRecipe();
-  // 5. жорыг гүйцэтгэх хугацаа болон орцыг тооцоолно
-  clearLoader();
-  state.recipe.calcTime();
-  state.recipe.calcHuniiToo();
-  // 6. жороо дэлгэц гаргана
-  renderRecipe(state.recipe);
+
+  if (id) {
+    // 2. Жорийн моделийг үүсгэж өгнө
+    state.recipe = new Recipe(id);
+    // 3. UI дэлгэцийг бэлтгэнэ
+    clearRecipe();
+    renderLoader(elements.recipeDiv);
+    highlightSelectRecipe(id);
+    // 4. жороо татаж авчирна
+    await state.recipe.getRecipe();
+    // 5. жорыг гүйцэтгэх хугацаа болон орцыг тооцоолно
+    clearLoader();
+    state.recipe.calcTime();
+    state.recipe.calcHuniiToo();
+    // 6. жороо дэлгэц гаргана
+    renderRecipe(state.recipe);
+  }
 };
-window.addEventListener("hashchange", controlRecipe);
-window.addEventListener("load", controlRecipe);
+// window.addEventListener("hashchange", controlRecipe);
+// window.addEventListener("load", controlRecipe);
+["hashchange", "load"].forEach((e) =>
+  window.addEventListener(e, controlRecipe)
+);
+
+/**
+ * найрлаганы котроллер
+ */
+const controlList = () => {
+  // nairlagiin modeliig vvsgene
+  state.list = new List();
+  // omno haragdaj baisan nairlagnuudiig ui clear
+  listView.clearItem();
+  // ug model ruu odoo haragdaj bgaa jorni buh nairlagiig awj hiine
+  state.recipe.ingredients.forEach((n) => {
+    // tuhain nairlagiig modelruu hiine
+    state.list.addItem(n);
+    // tuhain nairlagiig ui gargana
+    listView.renderItem(n);
+  });
+};
+elements.recipeDiv.addEventListener("click", (e) => {
+  if (e.target.matches(".recipe__btn")) {
+    controlList();
+  }
+});
