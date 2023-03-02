@@ -1,0 +1,25 @@
+import axios from "axios";
+export default class Recipe {
+  constructor(id) {
+    this.id = id;
+  }
+  async getRecipe() {
+    const result = await axios(
+      `https://forkify-api.herokuapp.com/api/get?rId=${this.id}`
+    );
+    console.log(result);
+    this.image__url = result.data.recipe.image__url;
+    this.ingredients = result.data.recipe.ingredients;
+    this.publisher = result.data.recipe.publisher;
+    this.recipe_id = result.data.recipe.recipe_id;
+    this.social_rank = result.data.recipe.social_rank;
+    this.source_url = result.data.recipe.source_url;
+    this.title = result.data.recipe.title;
+  }
+  calcTime() {
+    this.time = this.ingredients.length * 5;
+  }
+  calcHuniiToo() {
+    this.huniiToo = 4;
+  }
+}

@@ -59,7 +59,7 @@ var Search = /*#__PURE__*/function () {
             case 8:
               _context.prev = 8;
               _context.t0 = _context["catch"](0);
-              alert("\u0410\u043B\u0434\u0430\u0430 \u0433\u0430\u0440\u043B\u0430\u0430: ".concat(_context.t0));
+              console.log("\u0410\u043B\u0434\u0430\u0430 \u0433\u0430\u0440\u043B\u0430\u0430: ".concat(_context.t0));
             case 11:
             case "end":
               return _context.stop();

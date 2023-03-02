@@ -3,7 +3,7 @@ import { elements } from "./base";
 const renderRecipe = (recipe) => {
   const markup = `     
   <li>
-  <a class="results__link" href="${recipe.recipe_id}">
+  <a class="results__link" href="#${recipe.recipe_id}">
       <figure class="results__fig">
           <img src="${recipe.image_url}" alt="Test">
       </figure>
@@ -36,11 +36,8 @@ export const renderRecipes = (recipes, page = 1, resPage = 10) => {
   renderButtons(page, totalPages);
 };
 
-const createBtn = (
-  pages,
-  type,
-  direction
-) => `    <button class="btn-inline results__btn--${type}" data-goto=${pages}>
+const createBtn = (pages, type, direction) => `   
+ <button class="btn-inline results__btn--${type}" data-goto=${pages}>
 <svg class="search__icon">
     <use href="img/icons.svg#icon-triangle-${direction}"></use>
 </svg>

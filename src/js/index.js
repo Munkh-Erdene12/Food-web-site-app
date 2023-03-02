@@ -2,9 +2,7 @@ require("@babel/polyfill");
 import Search from "./model/search";
 import { elements, renderLoader, clearLoader } from "./view/base";
 import * as searchView from "./view/searchView";
-// let search = new Search("pasta");
-
-// search.doSearch().then((r) => console.log(r));
+import Recipe from "./model/Recipe";
 
 /**
  * web app төлөв
@@ -53,3 +51,22 @@ elements.pageBtns.addEventListener("click", (e) => {
     searchView.renderRecipes(state.search.result, goto);
   }
 });
+
+/**
+ * Жорын контроллер
+ */
+const controlRecipe = async () => {
+  // 1. URL-аас ID-ийг салгах
+  const id = window.location.hash.replace("#", "");
+  // 2. Жорийн моделийг үүсгэж өгнө
+  state.recipe = new Recipe(id);
+  // 3. UI дэлгэцийг бэлтгэнэ
+  // 4. жороо татаж авчирна
+  await state.recipe.getRecipe();
+  // 5. жорыг гүйцэтгэх хугацаа болон орцыг тооцоолно
+  state.recipe.calcTime();
+  state.recipe.calcHuniiToo();
+  // 6. жороо дэлгэц гаргана
+  console.log(state.recipe);
+};
+window.addEventListener("hashchange", controlRecipe);
